@@ -45,24 +45,24 @@ typedef struct {
 static const uint16_t NORMAL_TAP = 20;
 
 static const command step[] = {
-	{ NOTHING, 500 },
+	{ NOTHING, 300 },
 
 	{ B, 10 }, // Tap well
 	{ NOTHING, NORMAL_TAP },
 	{ A, 10 }, // Tap well
 	{ NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 60 },
+	{ NOTHING, 40 },
 
 	{ A, 10 }, // Scroll text
 	{ NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 60 },
+	{ NOTHING, 40 },
 
 	{ A, 10 }, // Scroll text
 	{ NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 60 },
+	{ NOTHING, 40 },
 
 	{ A, 10 }, // Invite
 	{ NOTHING, NORMAL_TAP },
@@ -77,14 +77,6 @@ static const command step[] = {
   // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
 	{ DOWN, 5 },
 	{ NOTHING, NORMAL_TAP },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
 	{ NOTHING, NORMAL_TAP/2 },
 	{ RIGHT, 5 },
@@ -129,8 +121,6 @@ static const command step[] = {
 	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
 	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
 
 	{ A, 5 },
 	{ NOTHING, NORMAL_TAP },
