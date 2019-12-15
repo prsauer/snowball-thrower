@@ -72,7 +72,7 @@ static const command step[] = {
 	{ HOME, 5 },
 	{ NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 130 },
+	{ NOTHING, 80 },
 
   // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
 	{ DOWN, 5 },
@@ -193,7 +193,7 @@ static const command step[] = {
 	// GAME SECTION
 	{ A, 10 }, // Enter game
 	{ NOTHING, NORMAL_TAP },
-	{ NOTHING, 100 },
+	{ NOTHING, 50 },
 
 	{ B, 10 }, // Quit
 	{ NOTHING, 100 },
