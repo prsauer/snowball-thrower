@@ -41,7 +41,8 @@ static const uint8_t DAYS_IN_MONTH = 3;
 
 // Number of cycles until the macro resets the date counter
 // back to 1 and skips an energy collection
-// WARNING: THIS MUST MATCH REPEAT_REDUCE_CYCLES IN MACRO BELOW
+// WARNING: REPEAT_REDUCE_CYCLES IN BELOW MACRO
+// MUST REPEAT DAYS_IN_MONTH + 1 TIMES
 
 static const command step[] = {
 	{ 256 },
@@ -316,6 +317,8 @@ static const command skip_step[] = {
 	{ NORMAL_TAP },
 
 	// START REPEAT_REDUCE_CYCLES
+	{ DOWN },
+	{ NORMAL_TAP },
 	{ DOWN },
 	{ NORMAL_TAP },
 	{ DOWN },
