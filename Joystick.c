@@ -91,7 +91,7 @@ static const command step[] = {
 	{ A, 5 },
 	{ NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 40 },
+	{ NOTHING, 20 },
 
 	{ DOWN, 5 },
 	{ NOTHING, NORMAL_TAP },
@@ -125,7 +125,7 @@ static const command step[] = {
 	{ A, 5 },
 	{ NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 40 },
+	{ NOTHING, 20 },
 
 	{ DOWN, 5 },
 	{ NOTHING, NORMAL_TAP },
@@ -140,7 +140,7 @@ static const command step[] = {
 	{ A, 5 },
 	{ NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 40 },
+	{ NOTHING, 20 },
 
 	{ DOWN, 5 },
 	{ NOTHING, NORMAL_TAP },
@@ -150,7 +150,7 @@ static const command step[] = {
 	{ A, 5 },
 	{ NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 40 },
+	{ NOTHING, 20 },
 
 	{ RIGHT, 5 },
 	{ NOTHING, NORMAL_TAP },
