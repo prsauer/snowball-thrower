@@ -47,24 +47,24 @@ static const uint16_t NORMAL_TAP = 20;
 static const command step[] = {
 	{ NOTHING, 500 },
 
-	{ B, 5 }, // Tap well
+	{ B, 10 }, // Tap well
 	{ NOTHING, NORMAL_TAP },
-	{ A, 5 }, // Tap well
-	{ NOTHING, NORMAL_TAP },
-
-	{ NOTHING, 100 },
-
-	{ A, 5 }, // Scroll text
+	{ A, 10 }, // Tap well
 	{ NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 100 },
+	{ NOTHING, 60 },
 
-	{ A, 5 }, // Scroll text
+	{ A, 10 }, // Scroll text
 	{ NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 100 },
+	{ NOTHING, 60 },
 
-	{ A, 5 }, // Invite
+	{ A, 10 }, // Scroll text
+	{ NOTHING, NORMAL_TAP },
+
+	{ NOTHING, 60 },
+
+	{ A, 10 }, // Invite
 	{ NOTHING, NORMAL_TAP },
 
 	{ NOTHING, 130 },
@@ -78,89 +78,89 @@ static const command step[] = {
 	{ DOWN, 5 },
 	{ NOTHING, NORMAL_TAP },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 
 	{ A, 5 },
 	{ NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 100 },
+	{ NOTHING, 40 },
 
 	{ DOWN, 5 },
 	{ NOTHING, NORMAL_TAP },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
-
-	{ A, 5 },
-	{ NOTHING, NORMAL_TAP },
-
-	{ NOTHING, 100 },
-
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
-
-
-	{ A, 5 },
-	{ NOTHING, NORMAL_TAP },
-
-	{ NOTHING, 100 },
-
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
 	{ NOTHING, NORMAL_TAP },
 
 	{ A, 5 },
 	{ NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 100 },
+	{ NOTHING, 40 },
+
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP },
+
+
+	{ A, 5 },
+	{ NOTHING, NORMAL_TAP },
+
+	{ NOTHING, 40 },
+
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP },
+
+	{ A, 5 },
+	{ NOTHING, NORMAL_TAP },
+
+	{ NOTHING, 40 },
 
 	{ RIGHT, 5 },
 	{ NOTHING, NORMAL_TAP },
@@ -180,34 +180,34 @@ static const command step[] = {
 
 
 	{ A, 5 },
-	{ NOTHING, 3*NORMAL_TAP },
+	{ NOTHING, 2*NORMAL_TAP },
 
 	{ B, 5 },
-	{ NOTHING, 2*NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP },
 	{ B, 5 },
-	{ NOTHING, 2*NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP },
 	{ B, 5 },
 	{ NOTHING, 2*NORMAL_TAP },
 
 	{ UP, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ LEFT, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ LEFT, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 
-	{ NOTHING, 100 },
+	{ NOTHING, 50 },
 	// END RESET DATE -- CURSOR IS ON POKEMON GAME
 
 
 	// GAME SECTION
-	{ A, 5 }, // Enter game
+	{ A, 10 }, // Enter game
 	{ NOTHING, NORMAL_TAP },
 	{ NOTHING, 100 },
 
-	{ B, 5 }, // Quit
+	{ B, 10 }, // Quit
 	{ NOTHING, 100 },
-	{ A, 5 }, // Confirm Quit
+	{ A, 10 }, // Confirm Quit
 	{ NOTHING, NORMAL_TAP },
 
 	// Setup controller
