@@ -31,11 +31,11 @@ static const uint8_t NOTHING = 7;
 
 typedef struct {
 	uint8_t button;
-	uint8_t duration;
-} command; 
+} command;
 
 // Number of cycles to hold no inputs after button press
 static const uint16_t NORMAL_TAP = 20;
+static const uint16_t NORMAL_DOWN = 10;
 static const uint8_t DAYS_IN_MONTH = 3;
 
 // Number of cycles until the macro resets the date counter
@@ -43,313 +43,313 @@ static const uint8_t DAYS_IN_MONTH = 3;
 // WARNING: THIS MUST MATCH REPEAT_REDUCE_CYCLES IN MACRO BELOW
 
 static const command step[] = {
-	{ NOTHING, 256 },
+	{ 256 },
 
-	{ B, 10 }, // FAKE TAP TO WAKE CTRL UP
-	{ NOTHING, NORMAL_TAP },
-	{ A, 10 }, // Tap well
-	{ NOTHING, NORMAL_TAP },
+	{ B }, // FAKE TAP TO WAKE CTRL UP
+	{ NORMAL_TAP },
+	{ A }, // Tap well
+	{ NORMAL_TAP },
 
-	{ NOTHING, 40 },
+	{ 40 },
 
-	{ A, 10 }, // Scroll text
-	{ NOTHING, NORMAL_TAP },
+	{ A }, // Scroll text
+	{ NORMAL_TAP },
 
-	{ NOTHING, 40 },
+	{ 40 },
 
-	{ A, 10 }, // Scroll text
-	{ NOTHING, NORMAL_TAP },
+	{ A }, // Scroll text
+	{ NORMAL_TAP },
 
-	{ NOTHING, 40 },
+	{ 100 },
 
-	{ A, 10 }, // Invite
-	{ NOTHING, NORMAL_TAP },
+	{ A }, // Invite
+	{ NORMAL_TAP },
 
-	{ NOTHING, 130 },
+	{ 130 },
 
-	{ HOME, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ HOME },
+	{ NORMAL_TAP },
 
-	{ NOTHING, 80 },
+	{ 80 },
 
   // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
 
-	{ A, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ A },
+	{ NORMAL_TAP },
 
-	{ NOTHING, 20 },
+	{ 20 },
 
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
 
-	{ A, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ A },
+	{ NORMAL_TAP },
 
-	{ NOTHING, 20 },
+	{ 20 },
 
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-
-
-	{ A, 5 },
-	{ NOTHING, NORMAL_TAP },
-
-	{ NOTHING, 20 },
-
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
-
-	{ A, 5 },
-	{ NOTHING, NORMAL_TAP },
-
-	{ NOTHING, 20 },
-
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ UP, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
 
 
-	{ A, 5 },
-	{ NOTHING, 2*NORMAL_TAP },
+	{ A },
+	{ NORMAL_TAP },
 
-	{ B, 5 },
-	{ NOTHING, NORMAL_TAP },
-	{ B, 5 },
-	{ NOTHING, NORMAL_TAP },
-	{ B, 5 },
-	{ NOTHING, 2*NORMAL_TAP },
+	{ 20 },
 
-	{ UP, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ LEFT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ LEFT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
 
-	{ NOTHING, 50 },
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ UP },
+	{ NORMAL_TAP },
+
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+
+
+	{ A },
+	{ 2*NORMAL_TAP },
+
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ 2*NORMAL_TAP },
+
+	{ UP },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+
+	{ 50 },
 	// END RESET DATE -- CURSOR IS ON POKEMON GAME
 
 	// GAME SECTION
-	{ A, 10 }, // Enter game
-	{ NOTHING, NORMAL_TAP },
-	{ NOTHING, 50 },
+	{ A }, // Enter game
+	{ NORMAL_TAP },
+	{ 50 },
 
-	{ B, 10 }, // Quit
-	{ NOTHING, 100 },
-	{ A, 10 }, // Confirm Quit
-	{ NOTHING, NORMAL_TAP },
+	{ B }, // Quit
+	{ 100 },
+	{ A }, // Confirm Quit
+	{ NORMAL_TAP },
 };
 
 static const command skip_step[] = {
-	{ NOTHING, 256 },
+	{ 256 },
 
-	// { B, 10 }, // FAKE TAP TO WAKE CTRL UP
-	// { NOTHING, NORMAL_TAP },
+	{ B }, // FAKE TAP TO WAKE CTRL UP
+	{ NORMAL_TAP },
 
-	// { A, 10 }, // Tap well
-	// { NOTHING, NORMAL_TAP },
+	{ A }, // Tap well
+	{ NORMAL_TAP },
 
-	// { NOTHING, 40 },
+	{ 100 },
 
-	// { A, 10 }, // Invite
-	// { NOTHING, NORMAL_TAP },
+	{ A }, // Invite
+	{ NORMAL_TAP },
 
-	// { NOTHING, 130 },
+	{ 130 },
 
-	// { HOME, 5 },
-	// { NOTHING, NORMAL_TAP },
+	{ HOME },
+	{ NORMAL_TAP },
 
-	// { NOTHING, 80 },
+	{ 80 },
 
-  // // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { RIGHT, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { RIGHT, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { RIGHT, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { RIGHT, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
+  // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
 
-	// { A, 5 },
-	// { NOTHING, NORMAL_TAP },
+	{ A },
+	{ NORMAL_TAP },
 
-	// { NOTHING, 20 },
+	{ 20 },
 
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
 
-	// { A, 5 },
-	// { NOTHING, NORMAL_TAP },
+	{ A },
+	{ NORMAL_TAP },
 
-	// { NOTHING, 20 },
+	{ 20 },
 
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-
-
-	// { A, 5 },
-	// { NOTHING, NORMAL_TAP },
-
-	// { NOTHING, 20 },
-
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP },
-
-	// { A, 5 },
-	// { NOTHING, NORMAL_TAP },
-
-	// { NOTHING, 20 },
-
-	// { RIGHT, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-
-	// // START REPEAT_REDUCE_CYCLES
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { DOWN, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// // END REPEAT_REDUCE_CYCLES
-	// { RIGHT, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { RIGHT, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { RIGHT, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { RIGHT, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { RIGHT, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
 
 
-	// { A, 5 },
-	// { NOTHING, 2*NORMAL_TAP },
+	{ A },
+	{ NORMAL_TAP },
 
-	// { B, 5 },
-	// { NOTHING, NORMAL_TAP },
-	// { B, 5 },
-	// { NOTHING, NORMAL_TAP },
-	// { B, 5 },
-	// { NOTHING, 2*NORMAL_TAP },
+	{ 20 },
 
-	// { UP, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { LEFT, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
-	// { LEFT, 5 },
-	// { NOTHING, NORMAL_TAP/2 },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
 
-	// { NOTHING, 50 },
-	// // END RESET DATE -- CURSOR IS ON POKEMON GAME
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ RIGHT },
+	{ NORMAL_TAP },
+
+	// START REPEAT_REDUCE_CYCLES
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	// END REPEAT_REDUCE_CYCLES
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
 
 
-	// // GAME SECTION
-	// { A, 10 }, // Enter game
-	// { NOTHING, NORMAL_TAP },
-	// { NOTHING, 50 },
+	{ A },
+	{ NOTHING, 2*NORMAL_TAP },
 
-	// { B, 10 }, // Quit
-	// { NOTHING, 100 },
-	// { A, 10 }, // Confirm Quit
-	// { NOTHING, NORMAL_TAP },
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ NOTHING, 2*NORMAL_TAP },
+
+	{ UP },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+
+	{ 50 },
+	// END RESET DATE -- CURSOR IS ON POKEMON GAME
+
+
+	// GAME SECTION
+	{  }, // Enter game
+	{ NORMAL_TAP },
+	{ 50 },
+
+	{ B }, // Quit
+	{ 100 },
+	{ A }, // Confirm Quit
+	{ NORMAL_TAP },
 };
 
 // Main entry point.
@@ -504,19 +504,19 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 		return;
 	}
 
-	uint16_t buttonDuration = step[bufindex].duration;
+	uint16_t buttonDuration = NORMAL_DOWN;
 	uint16_t buttonToHit = step[bufindex].button;
+
+	if (cycle_repeat_counter == DAYS_IN_MONTH) {
+		buttonToHit = skip_step[bufindex].button;
+	}
+
 	if (buttonToHit > 6) {
 		buttonDuration = buttonToHit;
 		buttonToHit = NOTHING;
-	} else {
-		buttonDuration = NORMAL_TAP;
 	}
 
-	// if (cycle_repeat_counter == DAYS_IN_MONTH) {
-	// 	buttonDuration = skip_step[bufindex].duration;
-	// 	buttonToHit = skip_step[bufindex].button;
-	// }
+
 
 	// States and moves management
 	switch (state)
