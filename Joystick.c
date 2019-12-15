@@ -20,38 +20,30 @@ these buttons for our use.
 
 #include "Joystick.h"
 
-typedef enum {
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	HOME,
-	X,
-	Y,
-	A,
-	B,
-	L,
-	R,
-	THROW,
-	NOTHING,
-	TRIGGERS
-} Buttons_t;
+static const uint8_t UP = 0;
+static const uint8_t DOWN = 1;
+static const uint8_t LEFT = 2;
+static const uint8_t RIGHT = 3;
+static const uint8_t HOME = 4;
+static const uint8_t A = 5;
+static const uint8_t B = 6;
+static const uint8_t NOTHING = 7;
 
 typedef struct {
-	Buttons_t button;
-	uint16_t duration;
+	uint8_t button;
+	uint8_t duration;
 } command; 
 
 // Number of cycles to hold no inputs after button press
 static const uint16_t NORMAL_TAP = 20;
+static const uint8_t DAYS_IN_MONTH = 3;
 
 // Number of cycles until the macro resets the date counter
 // back to 1 and skips an energy collection
 // WARNING: THIS MUST MATCH REPEAT_REDUCE_CYCLES IN MACRO BELOW
-int DAYS_FOR_MONTH = 3;
 
 static const command step[] = {
-	{ NOTHING, 300 },
+	{ NOTHING, 256 },
 
 	{ B, 10 }, // FAKE TAP TO WAKE CTRL UP
 	{ NOTHING, NORMAL_TAP },
@@ -194,7 +186,6 @@ static const command step[] = {
 
 	{ NOTHING, 50 },
 	// END RESET DATE -- CURSOR IS ON POKEMON GAME
-
 
 	// GAME SECTION
 	{ A, 10 }, // Enter game
@@ -207,159 +198,158 @@ static const command step[] = {
 	{ NOTHING, NORMAL_TAP },
 };
 
-// MACRO CYCLE WITH NO ENERGY COLLECTION
 static const command skip_step[] = {
-	{ NOTHING, 300 },
+	{ NOTHING, 256 },
 
-	{ B, 10 }, // FAKE TAP TO WAKE CTRL UP
-	{ NOTHING, NORMAL_TAP },
+	// { B, 10 }, // FAKE TAP TO WAKE CTRL UP
+	// { NOTHING, NORMAL_TAP },
 
-	{ A, 10 }, // Tap well
-	{ NOTHING, NORMAL_TAP },
+	// { A, 10 }, // Tap well
+	// { NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 40 },
+	// { NOTHING, 40 },
 
-	{ A, 10 }, // Invite
-	{ NOTHING, NORMAL_TAP },
+	// { A, 10 }, // Invite
+	// { NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 130 },
+	// { NOTHING, 130 },
 
-	{ HOME, 5 },
-	{ NOTHING, NORMAL_TAP },
+	// { HOME, 5 },
+	// { NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 80 },
+	// { NOTHING, 80 },
 
-  // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
+  // // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { RIGHT, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { RIGHT, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { RIGHT, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { RIGHT, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
 
-	{ A, 5 },
-	{ NOTHING, NORMAL_TAP },
+	// { A, 5 },
+	// { NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 20 },
+	// { NOTHING, 20 },
 
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
 
-	{ A, 5 },
-	{ NOTHING, NORMAL_TAP },
+	// { A, 5 },
+	// { NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 20 },
+	// { NOTHING, 20 },
 
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-
-
-	{ A, 5 },
-	{ NOTHING, NORMAL_TAP },
-
-	{ NOTHING, 20 },
-
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
-
-	{ A, 5 },
-	{ NOTHING, NORMAL_TAP },
-
-	{ NOTHING, 20 },
-
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-
-	// START REPEAT_REDUCE_CYCLES
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	// END REPEAT_REDUCE_CYCLES
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ RIGHT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
 
 
-	{ A, 5 },
-	{ NOTHING, 2*NORMAL_TAP },
+	// { A, 5 },
+	// { NOTHING, NORMAL_TAP },
 
-	{ B, 5 },
-	{ NOTHING, NORMAL_TAP },
-	{ B, 5 },
-	{ NOTHING, NORMAL_TAP },
-	{ B, 5 },
-	{ NOTHING, 2*NORMAL_TAP },
+	// { NOTHING, 20 },
 
-	{ UP, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ LEFT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
-	{ LEFT, 5 },
-	{ NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP },
 
-	{ NOTHING, 50 },
-	// END RESET DATE -- CURSOR IS ON POKEMON GAME
+	// { A, 5 },
+	// { NOTHING, NORMAL_TAP },
+
+	// { NOTHING, 20 },
+
+	// { RIGHT, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+
+	// // START REPEAT_REDUCE_CYCLES
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { DOWN, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// // END REPEAT_REDUCE_CYCLES
+	// { RIGHT, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { RIGHT, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { RIGHT, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { RIGHT, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { RIGHT, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
 
 
-	// GAME SECTION
-	{ A, 10 }, // Enter game
-	{ NOTHING, NORMAL_TAP },
-	{ NOTHING, 50 },
+	// { A, 5 },
+	// { NOTHING, 2*NORMAL_TAP },
 
-	{ B, 10 }, // Quit
-	{ NOTHING, 100 },
-	{ A, 10 }, // Confirm Quit
-	{ NOTHING, NORMAL_TAP },
+	// { B, 5 },
+	// { NOTHING, NORMAL_TAP },
+	// { B, 5 },
+	// { NOTHING, NORMAL_TAP },
+	// { B, 5 },
+	// { NOTHING, 2*NORMAL_TAP },
+
+	// { UP, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { LEFT, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+	// { LEFT, 5 },
+	// { NOTHING, NORMAL_TAP/2 },
+
+	// { NOTHING, 50 },
+	// // END RESET DATE -- CURSOR IS ON POKEMON GAME
+
+
+	// // GAME SECTION
+	// { A, 10 }, // Enter game
+	// { NOTHING, NORMAL_TAP },
+	// { NOTHING, 50 },
+
+	// { B, 10 }, // Quit
+	// { NOTHING, 100 },
+	// { A, 10 }, // Confirm Quit
+	// { NOTHING, NORMAL_TAP },
 };
 
 // Main entry point.
@@ -514,13 +504,18 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 		return;
 	}
 
-	// Compute which rails to run on
-	Buttons_t buttonToHit = step[bufindex].button;
 	uint16_t buttonDuration = step[bufindex].duration;
+	uint16_t buttonToHit = step[bufindex].button;
+	if (buttonToHit > 6) {
+		buttonDuration = buttonToHit;
+		buttonToHit = NOTHING;
+	} else {
+		buttonDuration = NORMAL_TAP;
+	}
 
-	// if (cycle_repeat_counter > 2) {
-		// buttonToHit = skip_step[bufindex].button;
-		// buttonDuration = skip_step[bufindex].duration;
+	// if (cycle_repeat_counter == DAYS_IN_MONTH) {
+	// 	buttonDuration = skip_step[bufindex].duration;
+	// 	buttonToHit = skip_step[bufindex].button;
 	// }
 
 	// States and moves management
@@ -609,18 +604,18 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 					ReportData->Button |= SWITCH_B;
 					break;
 
-				case R:
-					ReportData->Button |= SWITCH_R;
-					break;
+				// case R:
+				// 	ReportData->Button |= SWITCH_R;
+				// 	break;
 
-				case THROW:
-					ReportData->LY = STICK_MIN;				
-					ReportData->Button |= SWITCH_R;
-					break;
+				// case THROW:
+				// 	ReportData->LY = STICK_MIN;				
+				// 	ReportData->Button |= SWITCH_R;
+				// 	break;
 
-				case TRIGGERS:
-					ReportData->Button |= SWITCH_L | SWITCH_R;
-					break;
+				// case TRIGGERS:
+				// 	ReportData->Button |= SWITCH_L | SWITCH_R;
+				// 	break;
 
 				default:
 					ReportData->LX = STICK_CENTER;
@@ -639,20 +634,21 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 				duration_count = 0;				
 			}
 
-			skipsize = (int)( sizeof(step) / sizeof(step[0]));
-			if (cycle_repeat_counter == DAYS_FOR_MONTH) {
+			if (cycle_repeat_counter == DAYS_IN_MONTH) {
 				skipsize = (int)( sizeof(skip_step) / sizeof(skip_step[0]));
+			} else {
+				skipsize = (int)( sizeof(step) / sizeof(step[0]));
 			}
 			if (bufindex > skipsize - 1)
 			{
 
 				bufindex = 0;
 				duration_count = 0;
-				// if (cycle_repeat_counter == DAYS_FOR_MONTH) {
-				// 	cycle_repeat_counter = 0;
-				// } else {
-				// 	cycle_repeat_counter++;
-				// }
+				if (cycle_repeat_counter == DAYS_IN_MONTH) {
+					cycle_repeat_counter = 0;
+				} else {
+					cycle_repeat_counter++;
+				}
 
 				state = BREATHE;
 
