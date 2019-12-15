@@ -35,7 +35,8 @@ typedef struct {
 
 // Number of cycles to hold no inputs after button press
 static const uint16_t NORMAL_TAP = 20;
-static const uint16_t NORMAL_DOWN = 10;
+static const uint16_t FAST_TAP = 7;
+static const uint16_t NORMAL_DOWN = 8;
 static const uint8_t DAYS_IN_MONTH = 3;
 
 // Number of cycles until the macro resets the date counter
@@ -44,9 +45,12 @@ static const uint8_t DAYS_IN_MONTH = 3;
 
 static const command step[] = {
 	{ 256 },
+	{ 64 },
 
 	{ B }, // FAKE TAP TO WAKE CTRL UP
 	{ NORMAL_TAP },
+	{ 80 },
+
 	{ A }, // Tap well
 	{ NORMAL_TAP },
 
@@ -74,17 +78,17 @@ static const command step[] = {
 
   // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ RIGHT },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ RIGHT },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ RIGHT },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ RIGHT },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 
 	{ A },
 	{ NORMAL_TAP },
@@ -92,33 +96,33 @@ static const command step[] = {
 	{ 20 },
 
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 
 	{ A },
 	{ NORMAL_TAP },
@@ -126,13 +130,13 @@ static const command step[] = {
 	{ 20 },
 
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 
 
 	{ A },
@@ -141,9 +145,9 @@ static const command step[] = {
 	{ 20 },
 
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ DOWN },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 
 	{ A },
 	{ NORMAL_TAP },
@@ -151,20 +155,20 @@ static const command step[] = {
 	{ 20 },
 
 	{ RIGHT },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ UP },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 
 	{ RIGHT },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ RIGHT },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ RIGHT },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ RIGHT },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 	{ RIGHT },
-	{ NORMAL_TAP },
+	{ FAST_TAP },
 
 
 	{ A },
@@ -203,6 +207,7 @@ static const command skip_step[] = {
 
 	{ B }, // FAKE TAP TO WAKE CTRL UP
 	{ NORMAL_TAP },
+	{ 80 },
 
 	{ A }, // Tap well
 	{ NORMAL_TAP },
