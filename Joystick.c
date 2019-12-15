@@ -212,6 +212,16 @@ static const command skip_step[] = {
 	{ A }, // Tap well
 	{ NORMAL_TAP },
 
+	{ 40 },
+
+	{ A }, // Scroll text
+	{ NORMAL_TAP },
+
+	{ 40 },
+
+	{ A }, // Scroll text
+	{ NORMAL_TAP },
+
 	{ 100 },
 
 	{ A }, // Invite
@@ -347,7 +357,154 @@ static const command skip_step[] = {
 
 
 	// GAME SECTION
-	{  }, // Enter game
+	{ A }, // Enter game
+	{ NORMAL_TAP },
+	{ 50 },
+
+	{ B }, // Quit
+	{ 100 },
+	{ A }, // Confirm Quit
+	{ NORMAL_TAP },
+
+	{ 256 },
+	{ 64 },
+
+	{ B }, // FAKE TAP TO WAKE CTRL UP
+	{ NORMAL_TAP },
+	{ 80 },
+
+	{ A }, // Tap well
+	{ NORMAL_TAP },
+
+	{ 100 },
+
+	{ A }, // Invite
+	{ NORMAL_TAP },
+
+	{ 130 },
+
+	{ HOME },
+	{ NORMAL_TAP },
+
+	{ 80 },
+
+  // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ RIGHT },
+	{ FAST_TAP },
+	{ UP },
+	{ FAST_TAP },
+
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+
+
+	{ A },
+	{ 2*NORMAL_TAP },
+
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ 2*NORMAL_TAP },
+
+	{ UP },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+
+	{ 50 },
+	// END RESET DATE -- CURSOR IS ON POKEMON GAME
+
+	// GAME SECTION
+	{ A }, // Enter game
 	{ NORMAL_TAP },
 	{ 50 },
 
