@@ -42,12 +42,18 @@ typedef struct {
 	uint16_t duration;
 } command; 
 
+// Number of cycles to hold no inputs after button press
 static const uint16_t NORMAL_TAP = 20;
+
+// Number of cycles until the macro resets the date counter
+// back to 1 and skips an energy collection
+// WARNING: THIS MUST MATCH REPEAT_REDUCE_CYCLES IN MACRO BELOW
+int DAYS_FOR_MONTH = 3;
 
 static const command step[] = {
 	{ NOTHING, 300 },
 
-	{ B, 10 }, // Tap well
+	{ B, 10 }, // FAKE TAP TO WAKE CTRL UP
 	{ NOTHING, NORMAL_TAP },
 	{ A, 10 }, // Tap well
 	{ NOTHING, NORMAL_TAP },
@@ -76,7 +82,7 @@ static const command step[] = {
 
   // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
 	{ NOTHING, NORMAL_TAP/2 },
 	{ RIGHT, 5 },
@@ -94,7 +100,7 @@ static const command step[] = {
 	{ NOTHING, 20 },
 
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
 	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
@@ -128,13 +134,13 @@ static const command step[] = {
 	{ NOTHING, 20 },
 
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
-	{ DOWN, 5 },
 	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
 	{ NOTHING, NORMAL_TAP/2 },
 	{ DOWN, 5 },
-	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
 
 
 	{ A, 5 },
@@ -199,76 +205,161 @@ static const command step[] = {
 	{ NOTHING, 100 },
 	{ A, 10 }, // Confirm Quit
 	{ NOTHING, NORMAL_TAP },
+};
 
-	// Setup controller
-	// { NOTHING,  250 },
-	// { TRIGGERS,   5 },
-	// { NOTHING,  150 },
-	// { TRIGGERS,   5 },
-	// { NOTHING,  150 },
-	// { A,          5 },
-	// { NOTHING,  250 },
+// MACRO CYCLE WITH NO ENERGY COLLECTION
+static const command skip_step[] = {
+	{ NOTHING, 300 },
 
-	// // Talk to Pondo
-	// { A,          5 }, // Start
-	// { NOTHING,   30 },
-	// { B,          5 }, // Quick output of text
-	// { NOTHING,   20 }, // Halloo, kiddums!
-	// { A,          5 }, // <- I'll try it!
-	// { NOTHING,   15 },
-	// { B,          5 },
-	// { NOTHING,   20 },
-	// { A,          5 }, // <- OK!
-	// { NOTHING,   15 },
-	// { B,          5 },
-	// { NOTHING,   20 }, // Aha! Play bells are ringing! I gotta set up the pins, but I'll be back in a flurry
-	// { A,          5 }, // <Continue>
-	// { NOTHING,  325 }, // Cut to different scene (Knock 'em flat!)
-	// { B,          5 },
-	// { NOTHING,   20 },
-	// { A,          5 }, // <Continue> // Camera transition takes place after this
-	// { NOTHING,   50 },
-	// { B,          5 },
-	// { NOTHING,   20 }, // If you can knock over all 10 pins in one roll, that's a strike
-	// { A,          5 }, // <Continue>
-	// { NOTHING,   15 },
-	// { B,          5 },
-	// { NOTHING,   20 }, // A spare is...
-	// { A,          5 }, // <Continue>
-	// { NOTHING,  100 }, // Well, good luck
-	// { A,          5 }, // <Continue>
-	// { NOTHING,  150 }, // Pondo walks away
+	{ B, 10 }, // FAKE TAP TO WAKE CTRL UP
+	{ NOTHING, NORMAL_TAP },
 
-	// // Pick up Snowball (Or alternatively, run to bail in case of a non-strike)
-	// { A,          5 },
-	// { NOTHING,   50 },
-	// { LEFT,      42 },
-	// { UP,        80 },
-	// { THROW,     25 },
+	{ A, 10 }, // Tap well
+	{ NOTHING, NORMAL_TAP },
 
-	// // Non-strike alternative flow, cancel bail and rethrow
-	// { NOTHING,   30 },
-	// { B,          5 },
-	// { NOTHING,   20 },
-	// { B,          5 }, // I have to split dialogue (It's nothing)
-	// { NOTHING,   15 },
-	// { B,          5 },
-	// { NOTHING,   20 },
-	// { B,          5 },
-	// { NOTHING,  450 },
-	// { B,          5 }, // Snowly moly... there are rules!
-	// { NOTHING,   20 },
-	// { B,          5 },
-	// { NOTHING,   20 },
-	// { B,          5 }, // Second dialogue
-	// { NOTHING,   20 },
-	// { DOWN,      10 }, // Return to snowball
-	// { NOTHING,   20 },
-	// { A,          5 }, // Pick up snowball, we just aimlessly throw it
-	// { NOTHING,   50 },
-	// { UP,        10 },
-	// { THROW,     25 },
+	{ NOTHING, 40 },
 
+	{ A, 10 }, // Invite
+	{ NOTHING, NORMAL_TAP },
+
+	{ NOTHING, 130 },
+
+	{ HOME, 5 },
+	{ NOTHING, NORMAL_TAP },
+
+	{ NOTHING, 80 },
+
+  // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ RIGHT, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ RIGHT, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ RIGHT, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ RIGHT, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+
+	{ A, 5 },
+	{ NOTHING, NORMAL_TAP },
+
+	{ NOTHING, 20 },
+
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+
+	{ A, 5 },
+	{ NOTHING, NORMAL_TAP },
+
+	{ NOTHING, 20 },
+
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+
+
+	{ A, 5 },
+	{ NOTHING, NORMAL_TAP },
+
+	{ NOTHING, 20 },
+
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP },
+
+	{ A, 5 },
+	{ NOTHING, NORMAL_TAP },
+
+	{ NOTHING, 20 },
+
+	{ RIGHT, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+
+	// START REPEAT_REDUCE_CYCLES
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ DOWN, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	// END REPEAT_REDUCE_CYCLES
+	{ RIGHT, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ RIGHT, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ RIGHT, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ RIGHT, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ RIGHT, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+
+
+	{ A, 5 },
+	{ NOTHING, 2*NORMAL_TAP },
+
+	{ B, 5 },
+	{ NOTHING, NORMAL_TAP },
+	{ B, 5 },
+	{ NOTHING, NORMAL_TAP },
+	{ B, 5 },
+	{ NOTHING, 2*NORMAL_TAP },
+
+	{ UP, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ LEFT, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+	{ LEFT, 5 },
+	{ NOTHING, NORMAL_TAP/2 },
+
+	{ NOTHING, 50 },
+	// END RESET DATE -- CURSOR IS ON POKEMON GAME
+
+
+	// GAME SECTION
+	{ A, 10 }, // Enter game
+	{ NOTHING, NORMAL_TAP },
+	{ NOTHING, 50 },
+
+	{ B, 10 }, // Quit
+	{ NOTHING, 100 },
+	{ A, 10 }, // Confirm Quit
+	{ NOTHING, NORMAL_TAP },
 };
 
 // Main entry point.
@@ -401,6 +492,8 @@ int ypos = 0;
 int bufindex = 0;
 int duration_count = 0;
 int portsval = 0;
+int cycle_repeat_counter = 0;
+int skipsize = 0;
 
 // Prepare the next report for the host.
 void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
@@ -420,6 +513,15 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 		echoes--;
 		return;
 	}
+
+	// Compute which rails to run on
+	Buttons_t buttonToHit = step[bufindex].button;
+	uint16_t buttonDuration = step[bufindex].duration;
+
+	// if (cycle_repeat_counter > 2) {
+		// buttonToHit = skip_step[bufindex].button;
+		// buttonDuration = skip_step[bufindex].duration;
+	// }
 
 	// States and moves management
 	switch (state)
@@ -476,7 +578,7 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 
 		case PROCESS:
 
-			switch (step[bufindex].button)
+			switch (buttonToHit)
 			{
 
 				case UP:
@@ -531,20 +633,26 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 
 			duration_count++;
 
-			if (duration_count > step[bufindex].duration)
+			if (duration_count > buttonDuration)
 			{
 				bufindex++;
 				duration_count = 0;				
 			}
 
-
-			if (bufindex > (int)( sizeof(step) / sizeof(step[0])) - 1)
+			skipsize = (int)( sizeof(step) / sizeof(step[0]));
+			if (cycle_repeat_counter == DAYS_FOR_MONTH) {
+				skipsize = (int)( sizeof(skip_step) / sizeof(skip_step[0]));
+			}
+			if (bufindex > skipsize - 1)
 			{
-
-				// state = CLEANUP;
 
 				bufindex = 0;
 				duration_count = 0;
+				// if (cycle_repeat_counter == DAYS_FOR_MONTH) {
+				// 	cycle_repeat_counter = 0;
+				// } else {
+				// 	cycle_repeat_counter++;
+				// }
 
 				state = BREATHE;
 
@@ -553,11 +661,6 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 				ReportData->RX = STICK_CENTER;
 				ReportData->RY = STICK_CENTER;
 				ReportData->HAT = HAT_CENTER;
-
-
-				// state = DONE;
-//				state = BREATHE;
-
 			}
 
 			break;
