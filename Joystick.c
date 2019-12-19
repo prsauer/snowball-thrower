@@ -32,11 +32,11 @@ static const uint8_t NOTHING = 8;
 static const uint8_t LONG_LEFT = 9;
 static const uint8_t LONG_UP = 10;
 static const uint8_t LONG_DOWN = 11;
-static const uint8_t LONG_RIGHT = 12;
+// static const uint8_t LONG_RIGHT = 12;
 static const uint8_t SHORT_LEFT = 13;
 static const uint8_t SHORT_UP = 14;
 static const uint8_t SHORT_DOWN = 15;
-static const uint8_t SHORT_RIGHT = 16;
+// static const uint8_t SHORT_RIGHT = 16;
 
 static const uint8_t MAX_JOY_ENUM = 17;
 
@@ -62,7 +62,7 @@ static const uint8_t DAYS_IN_MONTH = 4;
 // MUST REPEAT DAYS_IN_MONTH + 1 TIMES
 
 static const command step[] = {
-	{ 64 },
+	{ 200 },
 	// Interactions with well and date reset
 	{ B }, // wake up ctrl
 	{ A }, // Tap well
@@ -217,7 +217,6 @@ static const command step[] = {
 
 	{ 128 },
 	// Fly from hills into hammerlock
-	{ B }, // null press to wake
 	{ X }, // open menu
 	{ 32 },
 	{ A }, // select town map
@@ -234,7 +233,6 @@ static const command step[] = {
 	{ 200 }, // await load
 
 	// Use lotto interaction
-	{ B }, // null press to wake
 	{ LONG_UP }, // walk up to lotto machine
 	{ LEFT },
 	{ 64 },
@@ -285,7 +283,6 @@ static const command step[] = {
 	{ 200 }, //wait for load
 
 	// Fly from hammerlock into hills
-	{ B }, // null press to wake
 	{ X }, // open menu
 	{ 32 },
 	{ A }, // select town map
@@ -313,7 +310,6 @@ static const command step[] = {
 	{ LONG_UP },
 	{ LONG_UP },
 	{ UP },
-	{ 64 },
 };
 
 static const command skip_step[] = {
@@ -438,6 +434,8 @@ static const command skip_step[] = {
 	{ NORMAL_TAP },
 	{ DOWN },
 	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
 	// END REPEAT_REDUCE_CYCLES
 	{ RIGHT },
 	{ NORMAL_TAP },
@@ -482,12 +480,8 @@ static const command skip_step[] = {
 	{ A }, // Confirm Quit
 	{ NORMAL_TAP },
 
-	{ 256 },
-	{ 64 },
-
-	{ B }, // FAKE TAP TO WAKE CTRL UP
-	{ NORMAL_TAP },
-	{ 80 },
+	{ 255 },
+	{ 150 },
 
 	{ A }, // Tap well
 	{ NORMAL_TAP },
@@ -628,7 +622,6 @@ static const command skip_step[] = {
 	{ 100 },
 	{ A }, // Confirm Quit
 	{ NORMAL_TAP },
-	{ 200 },
 };
 
 // Main entry point.
@@ -793,16 +786,16 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 	if (
 		buttonToHit == SHORT_LEFT ||
 		buttonToHit == SHORT_UP ||
-		buttonToHit == SHORT_DOWN ||
-		buttonToHit == SHORT_RIGHT
+		buttonToHit == SHORT_DOWN
+		// || buttonToHit == SHORT_RIGHT
 	) {
 		buttonDuration = FAST_DOWN;	
 	}
 	if (
 		buttonToHit == LONG_LEFT || 
 		buttonToHit == LONG_UP || 
-		buttonToHit == LONG_DOWN ||
-		buttonToHit == LONG_RIGHT
+		buttonToHit == LONG_DOWN
+		// || buttonToHit == LONG_RIGHT
 	) {
 		buttonDuration = LONGNESS_FACTOR*NORMAL_DOWN;
 	}
@@ -867,8 +860,8 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 					ReportData->LY = STICK_MAX;				
 					break;
 
-				case LONG_RIGHT:
-				case SHORT_RIGHT:
+				// case LONG_RIGHT:
+				// case SHORT_RIGHT:
 				case RIGHT:
 					ReportData->LX = STICK_MAX;				
 					break;
