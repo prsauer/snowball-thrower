@@ -40,17 +40,20 @@ static const uint8_t SHORT_RIGHT = 16;
 
 static const uint8_t MAX_JOY_ENUM = 17;
 
-static const uint8_t LONGNESS_FACTOR = 5;
-
 typedef struct {
 	uint8_t button;
 } command;
 
 // Number of cycles to hold no inputs after button press
 static const uint16_t NORMAL_TAP = 20;
-static const uint16_t FAST_TAP = 7;
+static const uint16_t FAST_TAP = 244;
+
+// Length of press constants
+static const uint8_t LONGNESS_FACTOR = 5;
 static const uint16_t NORMAL_DOWN = 8;
 static const uint16_t FAST_DOWN = 2;
+
+// Number of cycles to reset date back down
 static const uint8_t DAYS_IN_MONTH = 3;
 
 // Number of cycles until the macro resets the date counter
@@ -59,7 +62,229 @@ static const uint8_t DAYS_IN_MONTH = 3;
 // MUST REPEAT DAYS_IN_MONTH + 1 TIMES
 
 static const command step[] = {
+	{ 64 },
+	// Interactions with well and date reset
+	{ B }, // wake up ctrl
+	{ A }, // Tap well
+	{ NORMAL_TAP },
+
+	{ 40 },
+
+	{ A }, // Scroll text
+	{ NORMAL_TAP },
+
+	{ 40 },
+
+	{ A }, // Scroll text
+	{ NORMAL_TAP },
+
+	{ 100 },
+
+	{ A }, // Invite
+	{ NORMAL_TAP },
+
+	{ 130 },
+
+	{ HOME },
+	{ NORMAL_TAP },
+
+	{ 80 },
+
+  // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ RIGHT },
+	{ FAST_TAP },
+	{ UP },
+	{ FAST_TAP },
+
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+
+
+	{ A },
+	{ 2*NORMAL_TAP },
+
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ 2*NORMAL_TAP },
+
+	{ UP },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+
+	{ 50 },
+	// END RESET DATE -- CURSOR IS ON POKEMON GAME
+
+	// GAME SECTION
+	{ A }, // Enter game
+	{ NORMAL_TAP },
+	{ 50 },
+
+	{ B }, // Quit
+	{ 100 },
+	{ A }, // Confirm Quit
+	{ NORMAL_TAP },
+
 	{ 128 },
+	// Fly from hills into hammerlock
+	{ B }, // null press to wake
+	{ X }, // open menu
+	{ 32 },
+	{ A }, // select town map
+	{ 200 },
+	{ 200 },
+	{ SHORT_UP }, // move cursor to hammerlock
+	{ SHORT_LEFT },
+	{ A }, // tap hammerlock FP
+	{ 32 },
+	{ A }, // tap FLY
+	{ 200 }, // await load
+
+	{ LONG_UP }, // into pokecenter
+	{ 200 }, // await load
+
+	// Use lotto interaction
+	{ B }, // null press to wake
+	{ LONG_UP }, // walk up to lotto machine
+	{ LEFT },
+	{ 64 },
+	{ A }, // engage
+	{ 128 },
+	{ A }, // engage
+	{ 128 },
+	{ DOWN }, // select lotto
+	{ 200 },
+	// MENU MASHING FOR REWARD...
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	{ A },
+	{ 200 },
+	// END MENU MASHING FOR REWARD...
+	{ RIGHT }, // Exit pokecenter
+	{ LONG_DOWN },
+	{ 200 }, //wait for load
+
+	// Fly from hammerlock into hills
 	{ B }, // null press to wake
 	{ X }, // open menu
 	{ 32 },
@@ -69,6 +294,26 @@ static const command step[] = {
 	{ SHORT_DOWN }, // move cursor to hammerlock hills
 	{ A }, // tap hammerlock hills FP
 	{ 32 },
+	{ A }, // tap hammerlock hills FLY
+	{ 200 }, // wait load
+	{ 128 },
+
+	// walk to up well
+	{ LONG_UP },
+	{ LONG_UP },
+	{ LONG_UP },
+	{ LEFT },
+	{ LONG_LEFT },
+	{ LONG_LEFT },
+	{ LONG_UP },
+	{ LONG_UP },
+	{ LONG_UP },
+	{ LONG_UP },
+	{ LONG_UP },
+	{ LONG_UP },
+	{ LONG_UP },
+	{ UP },
+	{ 64 },
 };
 
 static const command skip_step[] = {
@@ -383,6 +628,7 @@ static const command skip_step[] = {
 	{ 100 },
 	{ A }, // Confirm Quit
 	{ NORMAL_TAP },
+	{ 200 },
 };
 
 // Main entry point.
@@ -559,6 +805,11 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 		buttonToHit == LONG_RIGHT
 	) {
 		buttonDuration = LONGNESS_FACTOR*NORMAL_DOWN;
+	}
+
+	if (buttonToHit == FAST_TAP) {
+		buttonDuration = 7;
+		buttonToHit = NOTHING;
 	}
 
 	if (buttonToHit > MAX_JOY_ENUM) {
