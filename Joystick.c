@@ -27,7 +27,20 @@ static const uint8_t RIGHT = 3;
 static const uint8_t HOME = 4;
 static const uint8_t A = 5;
 static const uint8_t B = 6;
-static const uint8_t NOTHING = 7;
+static const uint8_t X = 7;
+static const uint8_t NOTHING = 8;
+static const uint8_t LONG_LEFT = 9;
+static const uint8_t LONG_UP = 10;
+static const uint8_t LONG_DOWN = 11;
+static const uint8_t LONG_RIGHT = 12;
+static const uint8_t SHORT_LEFT = 13;
+static const uint8_t SHORT_UP = 14;
+static const uint8_t SHORT_DOWN = 15;
+static const uint8_t SHORT_RIGHT = 16;
+
+static const uint8_t MAX_JOY_ENUM = 17;
+
+static const uint8_t LONGNESS_FACTOR = 5;
 
 typedef struct {
 	uint8_t button;
@@ -37,6 +50,7 @@ typedef struct {
 static const uint16_t NORMAL_TAP = 20;
 static const uint16_t FAST_TAP = 7;
 static const uint16_t NORMAL_DOWN = 8;
+static const uint16_t FAST_DOWN = 2;
 static const uint8_t DAYS_IN_MONTH = 3;
 
 // Number of cycles until the macro resets the date counter
@@ -45,162 +59,16 @@ static const uint8_t DAYS_IN_MONTH = 3;
 // MUST REPEAT DAYS_IN_MONTH + 1 TIMES
 
 static const command step[] = {
-	{ 256 },
-	{ 64 },
-
-	{ B }, // FAKE TAP TO WAKE CTRL UP
-	{ NORMAL_TAP },
-	{ 80 },
-
-	{ A }, // Tap well
-	{ NORMAL_TAP },
-
-	{ 40 },
-
-	{ A }, // Scroll text
-	{ NORMAL_TAP },
-
-	{ 40 },
-
-	{ A }, // Scroll text
-	{ NORMAL_TAP },
-
-	{ 100 },
-
-	{ A }, // Invite
-	{ NORMAL_TAP },
-
-	{ 130 },
-
-	{ HOME },
-	{ NORMAL_TAP },
-
-	{ 80 },
-
-  // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-
-	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
-
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-
-	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
-
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-
-
-	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
-
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-
-	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
-
-	{ RIGHT },
-	{ FAST_TAP },
-	{ UP },
-	{ FAST_TAP },
-
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-
-
-	{ A },
-	{ 2*NORMAL_TAP },
-
-	{ B },
-	{ NORMAL_TAP },
-	{ B },
-	{ NORMAL_TAP },
-	{ B },
-	{ 2*NORMAL_TAP },
-
-	{ UP },
-	{ NORMAL_TAP },
-	{ LEFT },
-	{ NORMAL_TAP },
-	{ LEFT },
-	{ NORMAL_TAP },
-
-	{ 50 },
-	// END RESET DATE -- CURSOR IS ON POKEMON GAME
-
-	// GAME SECTION
-	{ A }, // Enter game
-	{ NORMAL_TAP },
-	{ 50 },
-
-	{ B }, // Quit
-	{ 100 },
-	{ A }, // Confirm Quit
-	{ NORMAL_TAP },
+	{ 128 },
+	{ B }, // null press to wake
+	{ X }, // open menu
+	{ 32 },
+	{ A }, // select town map
+	{ 200 },
+	{ 200 },
+	{ SHORT_DOWN }, // move cursor to hammerlock hills
+	{ A }, // tap hammerlock hills FP
+	{ 32 },
 };
 
 static const command skip_step[] = {
@@ -676,12 +544,27 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 		buttonToHit = skip_step[bufindex].button;
 	}
 
-	if (buttonToHit > 6) {
+	if (
+		buttonToHit == SHORT_LEFT ||
+		buttonToHit == SHORT_UP ||
+		buttonToHit == SHORT_DOWN ||
+		buttonToHit == SHORT_RIGHT
+	) {
+		buttonDuration = FAST_DOWN;	
+	}
+	if (
+		buttonToHit == LONG_LEFT || 
+		buttonToHit == LONG_UP || 
+		buttonToHit == LONG_DOWN ||
+		buttonToHit == LONG_RIGHT
+	) {
+		buttonDuration = LONGNESS_FACTOR*NORMAL_DOWN;
+	}
+
+	if (buttonToHit > MAX_JOY_ENUM) {
 		buttonDuration = buttonToHit;
 		buttonToHit = NOTHING;
 	}
-
-
 
 	// States and moves management
 	switch (state)
@@ -690,32 +573,6 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 		case SYNC_CONTROLLER:
 			state = BREATHE;
 			break;
-
-		// case SYNC_CONTROLLER:
-		// 	if (report_count > 550)
-		// 	{
-		// 		report_count = 0;
-		// 		state = SYNC_POSITION;
-		// 	}
-		// 	else if (report_count == 250 || report_count == 300 || report_count == 325)
-		// 	{
-		// 		ReportData->Button |= SWITCH_L | SWITCH_R;
-		// 	}
-		// 	else if (report_count == 350 || report_count == 375 || report_count == 400)
-		// 	{
-		// 		ReportData->Button |= SWITCH_A;
-		// 	}
-		// 	else
-		// 	{
-		// 		ReportData->Button = 0;
-		// 		ReportData->LX = STICK_CENTER;
-		// 		ReportData->LY = STICK_CENTER;
-		// 		ReportData->RX = STICK_CENTER;
-		// 		ReportData->RY = STICK_CENTER;
-		// 		ReportData->HAT = HAT_CENTER;
-		// 	}
-		// 	report_count++;
-		// 	break;
 
 		case SYNC_POSITION:
 			bufindex = 0;
@@ -741,18 +598,26 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 			switch (buttonToHit)
 			{
 
+				case SHORT_UP:
+				case LONG_UP:
 				case UP:
 					ReportData->LY = STICK_MIN;				
 					break;
 
+				case SHORT_LEFT:
+				case LONG_LEFT:
 				case LEFT:
 					ReportData->LX = STICK_MIN;				
 					break;
 
+				case LONG_DOWN:
+				case SHORT_DOWN:
 				case DOWN:
 					ReportData->LY = STICK_MAX;				
 					break;
 
+				case LONG_RIGHT:
+				case SHORT_RIGHT:
 				case RIGHT:
 					ReportData->LX = STICK_MAX;				
 					break;
@@ -767,6 +632,10 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 
 				case B:
 					ReportData->Button |= SWITCH_B;
+					break;
+
+				case X:
+					ReportData->Button |= SWITCH_X;
 					break;
 
 				// case R:
