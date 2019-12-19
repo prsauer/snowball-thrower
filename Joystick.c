@@ -54,7 +54,7 @@ static const uint16_t NORMAL_DOWN = 8;
 static const uint16_t FAST_DOWN = 2;
 
 // Number of cycles to reset date back down
-static const uint8_t DAYS_IN_MONTH = 3;
+static const uint8_t DAYS_IN_MONTH = 4;
 
 // Number of cycles until the macro resets the date counter
 // back to 1 and skips an energy collection
