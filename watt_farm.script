@@ -1,0 +1,472 @@
+static const command step[] = {
+	{ 256 },
+	{ 64 },
+
+	{ B }, // FAKE TAP TO WAKE CTRL UP
+	{ NORMAL_TAP },
+	{ 80 },
+
+	{ A }, // Tap well
+	{ NORMAL_TAP },
+
+	{ 40 },
+
+	{ A }, // Scroll text
+	{ NORMAL_TAP },
+
+	{ 40 },
+
+	{ A }, // Scroll text
+	{ NORMAL_TAP },
+
+	{ 100 },
+
+	{ A }, // Invite
+	{ NORMAL_TAP },
+
+	{ 130 },
+
+	{ HOME },
+	{ NORMAL_TAP },
+
+	{ 80 },
+
+  // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ RIGHT },
+	{ FAST_TAP },
+	{ UP },
+	{ FAST_TAP },
+
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+
+
+	{ A },
+	{ 2*NORMAL_TAP },
+
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ 2*NORMAL_TAP },
+
+	{ UP },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+
+	{ 50 },
+	// END RESET DATE -- CURSOR IS ON POKEMON GAME
+
+	// GAME SECTION
+	{ A }, // Enter game
+	{ NORMAL_TAP },
+	{ 50 },
+
+	{ B }, // Quit
+	{ 100 },
+	{ A }, // Confirm Quit
+	{ NORMAL_TAP },
+};
+
+static const command skip_step[] = {
+	{ 256 },
+
+	{ B }, // FAKE TAP TO WAKE CTRL UP
+	{ NORMAL_TAP },
+	{ 80 },
+
+	{ A }, // Tap well
+	{ NORMAL_TAP },
+
+	{ 40 },
+
+	{ A }, // Scroll text
+	{ NORMAL_TAP },
+
+	{ 40 },
+
+	{ A }, // Scroll text
+	{ NORMAL_TAP },
+
+	{ 100 },
+
+	{ A }, // Invite
+	{ NORMAL_TAP },
+
+	{ 130 },
+
+	{ HOME },
+	{ NORMAL_TAP },
+
+	{ 80 },
+
+  // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ RIGHT },
+	{ NORMAL_TAP },
+
+	// START REPEAT_REDUCE_CYCLES
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	{ DOWN },
+	{ NORMAL_TAP },
+	// END REPEAT_REDUCE_CYCLES
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+	{ RIGHT },
+	{ NORMAL_TAP },
+
+
+	{ A },
+	{ NOTHING, 2*NORMAL_TAP },
+
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ NOTHING, 2*NORMAL_TAP },
+
+	{ UP },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+
+	{ 50 },
+	// END RESET DATE -- CURSOR IS ON POKEMON GAME
+
+
+	// GAME SECTION
+	{ A }, // Enter game
+	{ NORMAL_TAP },
+	{ 50 },
+
+	{ B }, // Quit
+	{ 100 },
+	{ A }, // Confirm Quit
+	{ NORMAL_TAP },
+
+	{ 256 },
+	{ 64 },
+
+	{ B }, // FAKE TAP TO WAKE CTRL UP
+	{ NORMAL_TAP },
+	{ 80 },
+
+	{ A }, // Tap well
+	{ NORMAL_TAP },
+
+	{ 100 },
+
+	{ A }, // Invite
+	{ NORMAL_TAP },
+
+	{ 130 },
+
+	{ HOME },
+	{ NORMAL_TAP },
+
+	{ 80 },
+
+  // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ DOWN },
+	{ FAST_TAP },
+	{ DOWN },
+	{ FAST_TAP },
+
+	{ A },
+	{ NORMAL_TAP },
+
+	{ 20 },
+
+	{ RIGHT },
+	{ FAST_TAP },
+	{ UP },
+	{ FAST_TAP },
+
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+	{ RIGHT },
+	{ FAST_TAP },
+
+
+	{ A },
+	{ 2*NORMAL_TAP },
+
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ NORMAL_TAP },
+	{ B },
+	{ 2*NORMAL_TAP },
+
+	{ UP },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+	{ LEFT },
+	{ NORMAL_TAP },
+
+	{ 50 },
+	// END RESET DATE -- CURSOR IS ON POKEMON GAME
+
+	// GAME SECTION
+	{ A }, // Enter game
+	{ NORMAL_TAP },
+	{ 50 },
+
+	{ B }, // Quit
+	{ 100 },
+	{ A }, // Confirm Quit
+	{ NORMAL_TAP },
+};
