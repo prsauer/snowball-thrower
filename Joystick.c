@@ -76,9 +76,8 @@ static const command step[] = {
 	{ 40 },
 
 	{ A }, // Scroll text
-	{ NORMAL_TAP },
 
-	{ 100 },
+	{ 120 },
 
 	{ A }, // Invite
 	{ NORMAL_TAP },
@@ -86,9 +85,7 @@ static const command step[] = {
 	{ 130 },
 
 	{ HOME },
-	{ NORMAL_TAP },
-
-	{ 80 },
+	{ 100 },
 
   // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
 	{ DOWN },
@@ -105,9 +102,7 @@ static const command step[] = {
 	{ FAST_TAP },
 
 	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
+	{ 40 },
 
 	{ DOWN },
 	{ FAST_TAP },
@@ -200,28 +195,24 @@ static const command step[] = {
 	{ LEFT },
 	{ NORMAL_TAP },
 	{ LEFT },
-	{ NORMAL_TAP },
 
-	{ 50 },
+	{ 70 },
 	// END RESET DATE -- CURSOR IS ON POKEMON GAME
 
 	// GAME SECTION
 	{ A }, // Enter game
-	{ NORMAL_TAP },
-	{ 50 },
+	{ 70 },
 
 	{ B }, // Quit
 	{ 100 },
 	{ A }, // Confirm Quit
-	{ NORMAL_TAP },
 
-	{ 128 },
+	{ 148 },
 	// Fly from hills into hammerlock
 	{ X }, // open menu
 	{ 32 },
 	{ A }, // select town map
-	{ 200 },
-	{ 200 },
+	{ 240 },
 	{ SHORT_UP }, // move cursor to hammerlock
 	{ SHORT_LEFT },
 	{ A }, // tap hammerlock FP
@@ -286,8 +277,7 @@ static const command step[] = {
 	{ X }, // open menu
 	{ 32 },
 	{ A }, // select town map
-	{ 200 },
-	{ 200 },
+	{ 240 },
 	{ SHORT_DOWN }, // move cursor to hammerlock hills
 	{ A }, // tap hammerlock hills FP
 	{ 32 },
@@ -315,7 +305,6 @@ static const command step[] = {
 static const command skip_step[] = {
 	{ 256 },
 
-	{ B }, // FAKE TAP TO WAKE CTRL UP
 	{ NORMAL_TAP },
 	{ 80 },
 
@@ -408,9 +397,7 @@ static const command skip_step[] = {
 
 
 	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
+	{ 40 },
 
 	{ DOWN },
 	{ NORMAL_TAP },
@@ -418,9 +405,7 @@ static const command skip_step[] = {
 	{ NORMAL_TAP },
 
 	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
+	{ 40 },
 
 	{ RIGHT },
 	{ NORMAL_TAP },
@@ -464,39 +449,29 @@ static const command skip_step[] = {
 	{ LEFT },
 	{ NORMAL_TAP },
 	{ LEFT },
-	{ NORMAL_TAP },
-
-	{ 50 },
+	{ 70 },
 	// END RESET DATE -- CURSOR IS ON POKEMON GAME
 
 
 	// GAME SECTION
 	{ A }, // Enter game
-	{ NORMAL_TAP },
-	{ 50 },
+	{ 70 },
 
 	{ B }, // Quit
 	{ 100 },
 	{ A }, // Confirm Quit
-	{ NORMAL_TAP },
 
 	{ 255 },
 	{ 150 },
 
 	{ A }, // Tap well
-	{ NORMAL_TAP },
-
-	{ 100 },
+	{ 120 },
 
 	{ A }, // Invite
-	{ NORMAL_TAP },
-
-	{ 130 },
+	{ 150 },
 
 	{ HOME },
-	{ NORMAL_TAP },
-
-	{ 80 },
+	{ 100 },
 
   // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
 	{ DOWN },
@@ -547,9 +522,7 @@ static const command skip_step[] = {
 	{ FAST_TAP },
 
 	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
+	{ 40 },
 
 	{ DOWN },
 	{ FAST_TAP },
@@ -562,9 +535,7 @@ static const command skip_step[] = {
 
 
 	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
+	{ 40 },
 
 	{ DOWN },
 	{ FAST_TAP },
@@ -572,9 +543,7 @@ static const command skip_step[] = {
 	{ FAST_TAP },
 
 	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
+	{ 40 },
 
 	{ RIGHT },
 	{ FAST_TAP },
@@ -608,15 +577,12 @@ static const command skip_step[] = {
 	{ LEFT },
 	{ NORMAL_TAP },
 	{ LEFT },
-	{ NORMAL_TAP },
-
-	{ 50 },
+	{ 70 },
 	// END RESET DATE -- CURSOR IS ON POKEMON GAME
 
 	// GAME SECTION
 	{ A }, // Enter game
-	{ NORMAL_TAP },
-	{ 50 },
+	{ 70 },
 
 	{ B }, // Quit
 	{ 100 },
@@ -952,11 +918,6 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 			#endif
 			return;
 	}
-
-	// // Inking
-	// if (state != SYNC_CONTROLLER && state != SYNC_POSITION)
-	// 	if (pgm_read_byte(&(image_data[(xpos / 8) + (ypos * 40)])) & 1 << (xpos % 8))
-	// 		ReportData->Button |= SWITCH_A;
 
 	// Prepare to echo this report
 	memcpy(&last_report, ReportData, sizeof(USB_JoystickReport_Input_t));
