@@ -32,13 +32,15 @@ static const uint8_t NOTHING = 8;
 static const uint8_t LONG_LEFT = 9;
 static const uint8_t LONG_UP = 10;
 static const uint8_t LONG_DOWN = 11;
-// static const uint8_t LONG_RIGHT = 12;
+static const uint8_t LONG_RIGHT = 12;
 static const uint8_t SHORT_LEFT = 13;
 static const uint8_t SHORT_UP = 14;
 static const uint8_t SHORT_DOWN = 15;
-// static const uint8_t SHORT_RIGHT = 16;
+static const uint8_t SHORT_RIGHT = 16;
+static const uint8_t STICK_CIRCLE = 17;
+static const uint8_t STICK_CIRCLE_ADOWN = 18;
 
-static const uint8_t MAX_JOY_ENUM = 17;
+static const uint8_t MAX_JOY_ENUM = 19;
 
 typedef struct {
 	uint8_t button;
@@ -53,6 +55,8 @@ static const uint8_t LONGNESS_FACTOR = 5;
 static const uint16_t NORMAL_DOWN = 8;
 static const uint16_t FAST_DOWN = 2;
 
+// Feature flag for reset cycles mechanism
+static const bool RESET_CYCLES = false;
 // Number of cycles to reset date back down
 static const uint8_t DAYS_IN_MONTH = 4;
 
@@ -62,532 +66,79 @@ static const uint8_t DAYS_IN_MONTH = 4;
 // MUST REPEAT DAYS_IN_MONTH + 1 TIMES
 
 static const command step[] = {
-	{ 200 },
-	// Interactions with well and date reset
-	{ B }, // wake up ctrl
-	{ A }, // Tap well
-	{ NORMAL_TAP },
+	{ 128 },
+	{ B }, // null press to wake
+	{ 128 },
 
-	{ 40 },
-
-	{ A }, // Scroll text
-	{ NORMAL_TAP },
-
-	{ 40 },
-
-	{ A }, // Scroll text
-
-	{ 120 },
-
-	{ A }, // Invite
-	{ NORMAL_TAP },
-
-	{ 130 },
-
-	{ HOME },
-	{ 100 },
-
-  // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-
-	{ A },
-	{ 40 },
-
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-
-	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
-
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-
-
-	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
-
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-
-	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
-
-	{ RIGHT },
-	{ FAST_TAP },
-	{ UP },
-	{ FAST_TAP },
-
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-
-
-	{ A },
-	{ 2*NORMAL_TAP },
-
-	{ B },
-	{ NORMAL_TAP },
-	{ B },
-	{ NORMAL_TAP },
-	{ B },
-	{ 2*NORMAL_TAP },
-
-	{ UP },
-	{ NORMAL_TAP },
-	{ LEFT },
-	{ NORMAL_TAP },
-	{ LEFT },
-
-	{ 70 },
-	// END RESET DATE -- CURSOR IS ON POKEMON GAME
-
-	// GAME SECTION
-	{ A }, // Enter game
-	{ 70 },
-
-	{ B }, // Quit
-	{ 100 },
-	{ A }, // Confirm Quit
-
-	{ 148 },
-	// Fly from hills into hammerlock
 	{ X }, // open menu
 	{ 32 },
 	{ A }, // select town map
-	{ 240 },
-	{ SHORT_UP }, // move cursor to hammerlock
-	{ SHORT_LEFT },
-	{ A }, // tap hammerlock FP
-	{ 32 },
-	{ A }, // tap FLY
-	{ 200 }, // await load
-
-	{ LONG_UP }, // into pokecenter
-	{ 200 }, // await load
-
-	// Use lotto interaction
-	{ LONG_UP }, // walk up to lotto machine
-	{ LEFT },
-	{ 64 },
-	{ A }, // engage
-	{ 128 },
-	{ A }, // engage
-	{ 128 },
-	{ DOWN }, // select lotto
 	{ 200 },
-	// MENU MASHING FOR REWARD...
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	{ A },
-	{ 200 },
-	// END MENU MASHING FOR REWARD...
-	{ RIGHT }, // Exit pokecenter
-	{ LONG_DOWN },
-	{ 200 }, //wait for load
-
-	// Fly from hammerlock into hills
-	{ X }, // open menu
-	{ 32 },
-	{ A }, // select town map
-	{ 240 },
-	{ SHORT_DOWN }, // move cursor to hammerlock hills
 	{ A }, // tap hammerlock hills FP
 	{ 32 },
-	{ A }, // tap hammerlock hills FLY
-	{ 200 }, // wait load
+	{ A }, // FLY
+	{ 200 },
+	
+	// Chat for eggs
+	{ DOWN },
+	{ DOWN },
+	{ DOWN },
+	{ RIGHT },
+	{ A }, // talk
+	{ 128 },
+	{ A }, // yes
+	{ 128 },
+	{ A }, // scroll
+	{ 128 },
+	{ A }, // add to party
+	{ 128 },
+	{ A }, // scroll 
+	{ 128 },
+	{ A }, // scroll 
+	{ 128 },
+	{ DOWN }, // select
+	{ 128 },
+	{ A }, // confirm
+	{ 128 },
+	{ A }, // scroll
+	{ 128 },
+	{ A }, // scroll
 	{ 128 },
 
-	// walk to up well
+	// Fly
+	{ X }, // open menu
+	{ 32 },
+	{ A }, // select town map
+	{ 200 },
+	{ A }, // tap hammerlock hills FP
+	{ 32 },
+	{ A }, // FLY
+	{ 200 },
+
+	// Circle
 	{ LONG_UP },
 	{ LONG_UP },
-	{ LONG_UP },
-	{ LEFT },
-	{ LONG_LEFT },
-	{ LONG_LEFT },
-	{ LONG_UP },
-	{ LONG_UP },
-	{ LONG_UP },
-	{ LONG_UP },
-	{ LONG_UP },
-	{ LONG_UP },
-	{ LONG_UP },
-	{ UP },
+	{ LONG_RIGHT },
+	{ STICK_CIRCLE },
+  { STICK_CIRCLE_ADOWN },
+  { STICK_CIRCLE },
+  { STICK_CIRCLE_ADOWN },
+	{ STICK_CIRCLE },
+  { STICK_CIRCLE_ADOWN },
+  { STICK_CIRCLE },
+  { STICK_CIRCLE_ADOWN },
+	{ STICK_CIRCLE },
+  { STICK_CIRCLE_ADOWN },
+  { STICK_CIRCLE },
+  { STICK_CIRCLE_ADOWN },
+	{ STICK_CIRCLE },
+  { STICK_CIRCLE_ADOWN },
+  { STICK_CIRCLE },
+	{ STICK_CIRCLE_ADOWN },
 };
 
 static const command skip_step[] = {
-	{ 256 },
-
-	{ NORMAL_TAP },
-	{ 80 },
-
-	{ A }, // Tap well
-	{ NORMAL_TAP },
-
-	{ 40 },
-
-	{ A }, // Scroll text
-	{ NORMAL_TAP },
-
-	{ 40 },
-
-	{ A }, // Scroll text
-	{ NORMAL_TAP },
-
-	{ 100 },
-
-	{ A }, // Invite
-	{ NORMAL_TAP },
-
-	{ 130 },
-
-	{ HOME },
-	{ NORMAL_TAP },
-
-	{ 80 },
-
-  // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ RIGHT },
-	{ NORMAL_TAP },
-	{ RIGHT },
-	{ NORMAL_TAP },
-	{ RIGHT },
-	{ NORMAL_TAP },
-	{ RIGHT },
-	{ NORMAL_TAP },
-
-	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
-
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-
-	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
-
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-
-
-	{ A },
-	{ 40 },
-
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-
-	{ A },
-	{ 40 },
-
-	{ RIGHT },
-	{ NORMAL_TAP },
-
-	// START REPEAT_REDUCE_CYCLES
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	{ DOWN },
-	{ NORMAL_TAP },
-	// END REPEAT_REDUCE_CYCLES
-	{ RIGHT },
-	{ NORMAL_TAP },
-	{ RIGHT },
-	{ NORMAL_TAP },
-	{ RIGHT },
-	{ NORMAL_TAP },
-	{ RIGHT },
-	{ NORMAL_TAP },
-	{ RIGHT },
-	{ NORMAL_TAP },
-
-
-	{ A },
-	{ NOTHING, 2*NORMAL_TAP },
-
-	{ B },
-	{ NORMAL_TAP },
-	{ B },
-	{ NORMAL_TAP },
-	{ B },
-	{ NOTHING, 2*NORMAL_TAP },
-
-	{ UP },
-	{ NORMAL_TAP },
-	{ LEFT },
-	{ NORMAL_TAP },
-	{ LEFT },
-	{ 70 },
-	// END RESET DATE -- CURSOR IS ON POKEMON GAME
-
-
-	// GAME SECTION
-	{ A }, // Enter game
-	{ 70 },
-
-	{ B }, // Quit
-	{ 100 },
-	{ A }, // Confirm Quit
-
 	{ 255 },
-	{ 150 },
-
-	{ A }, // Tap well
-	{ 120 },
-
-	{ A }, // Invite
-	{ 150 },
-
-	{ HOME },
-	{ 100 },
-
-  // ADVANCE DATE - CURSOR SHOULD BE ON POKEMON GAME TO START
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-
-	{ A },
-	{ NORMAL_TAP },
-
-	{ 20 },
-
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-
-	{ A },
-	{ 40 },
-
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-
-
-	{ A },
-	{ 40 },
-
-	{ DOWN },
-	{ FAST_TAP },
-	{ DOWN },
-	{ FAST_TAP },
-
-	{ A },
-	{ 40 },
-
-	{ RIGHT },
-	{ FAST_TAP },
-	{ UP },
-	{ FAST_TAP },
-
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-	{ RIGHT },
-	{ FAST_TAP },
-
-
-	{ A },
-	{ 2*NORMAL_TAP },
-
-	{ B },
-	{ NORMAL_TAP },
-	{ B },
-	{ NORMAL_TAP },
-	{ B },
-	{ 2*NORMAL_TAP },
-
-	{ UP },
-	{ NORMAL_TAP },
-	{ LEFT },
-	{ NORMAL_TAP },
-	{ LEFT },
-	{ 70 },
-	// END RESET DATE -- CURSOR IS ON POKEMON GAME
-
-	// GAME SECTION
-	{ A }, // Enter game
-	{ 70 },
-
-	{ B }, // Quit
-	{ 100 },
-	{ A }, // Confirm Quit
-	{ NORMAL_TAP },
 };
 
 // Main entry point.
@@ -749,11 +300,15 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 		buttonToHit = skip_step[bufindex].button;
 	}
 
+	if ( buttonToHit == STICK_CIRCLE || buttonToHit == STICK_CIRCLE_ADOWN ) {
+		buttonDuration = NORMAL_DOWN * 20;
+	}
+
 	if (
 		buttonToHit == SHORT_LEFT ||
 		buttonToHit == SHORT_UP ||
 		buttonToHit == SHORT_DOWN
-		// || buttonToHit == SHORT_RIGHT
+		|| buttonToHit == SHORT_RIGHT
 	) {
 		buttonDuration = FAST_DOWN;	
 	}
@@ -761,7 +316,7 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 		buttonToHit == LONG_LEFT || 
 		buttonToHit == LONG_UP || 
 		buttonToHit == LONG_DOWN
-		// || buttonToHit == LONG_RIGHT
+		|| buttonToHit == LONG_RIGHT
 	) {
 		buttonDuration = LONGNESS_FACTOR*NORMAL_DOWN;
 	}
@@ -808,6 +363,17 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 			switch (buttonToHit)
 			{
 
+				case STICK_CIRCLE:
+					ReportData->RX = STICK_MIN;
+					ReportData->LX = STICK_MAX;
+					break;
+
+				case STICK_CIRCLE_ADOWN:
+					ReportData->RX = STICK_MIN;
+					ReportData->LX = STICK_MAX;
+					ReportData->Button |= SWITCH_A;
+					break;
+
 				case SHORT_UP:
 				case LONG_UP:
 				case UP:
@@ -826,8 +392,8 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 					ReportData->LY = STICK_MAX;				
 					break;
 
-				// case LONG_RIGHT:
-				// case SHORT_RIGHT:
+				case LONG_RIGHT:
+				case SHORT_RIGHT:
 				case RIGHT:
 					ReportData->LX = STICK_MAX;				
 					break;
@@ -890,7 +456,7 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 				duration_count = 0;
 				if (cycle_repeat_counter == DAYS_IN_MONTH) {
 					cycle_repeat_counter = 0;
-				} else {
+				} else if (RESET_CYCLES) {
 					cycle_repeat_counter++;
 				}
 
