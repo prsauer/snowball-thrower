@@ -135,6 +135,10 @@ static const command step[] = {
   { STICK_CIRCLE_ADOWN },
   { STICK_CIRCLE },
 	{ STICK_CIRCLE_ADOWN },
+	{ STICK_CIRCLE },
+  { STICK_CIRCLE_ADOWN },
+  { STICK_CIRCLE },
+	{ STICK_CIRCLE_ADOWN },
 };
 
 static const command skip_step[] = {
