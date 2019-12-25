@@ -39,8 +39,9 @@ static const uint8_t SHORT_DOWN = 15;
 static const uint8_t SHORT_RIGHT = 16;
 static const uint8_t STICK_CIRCLE = 17;
 static const uint8_t STICK_CIRCLE_ADOWN = 18;
+static const uint8_t R = 19;
 
-static const uint8_t MAX_JOY_ENUM = 19;
+static const uint8_t MAX_JOY_ENUM = 20;
 
 typedef struct {
 	uint8_t button;
@@ -55,94 +56,134 @@ static const uint8_t LONGNESS_FACTOR = 5;
 static const uint16_t NORMAL_DOWN = 8;
 static const uint16_t FAST_DOWN = 2;
 
-// Feature flag for reset cycles mechanism
-static const bool RESET_CYCLES = false;
-// Number of cycles to reset date back down
-static const uint8_t DAYS_IN_MONTH = 4;
+// Column size limits for pokemon release sequence
+static const uint8_t NUM_ROWS = 5;
+static const uint8_t NUM_COLUMNS = 5;
 
-// Number of cycles until the macro resets the date counter
-// back to 1 and skips an energy collection
-// WARNING: REPEAT_REDUCE_CYCLES IN BELOW MACRO
-// MUST REPEAT DAYS_IN_MONTH + 1 TIMES
+static const uint8_t WAIT_FOR_RELEASE = 64;
+static const uint8_t NORMAL_WAIT = 32;
+static const uint8_t WAIT_BETWEEN = 64;
 
 static const command step[] = {
 	{ 128 },
-	{ B }, // null press to wake
-	{ 128 },
-
-	{ X }, // open menu
-	{ 32 },
-	{ A }, // select town map
-	{ 200 },
-	{ A }, // tap hammerlock hills FP
-	{ 32 },
-	{ A }, // FLY
-	{ 200 },
-	
-	// Chat for eggs
+	{ X }, // wake up -- ACTUALLY PLUS!
+	{ NORMAL_WAIT },
+	{ R },
+	{ WAIT_BETWEEN },
+	{ A },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ A },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ A },
+	{ WAIT_FOR_RELEASE },
+	{ A },
+	{ WAIT_BETWEEN },
 	{ DOWN },
+	{ NORMAL_WAIT },
+	{ A },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ A },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ A },
+	{ WAIT_FOR_RELEASE },
+	{ A },
+	{ WAIT_BETWEEN },
 	{ DOWN },
+	{ NORMAL_WAIT },
+	{ A },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ A },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ A },
+	{ WAIT_FOR_RELEASE },
+	{ A },
+	{ WAIT_BETWEEN },
 	{ DOWN },
-	{ RIGHT },
-	{ A }, // talk
-	{ 128 },
-	{ A }, // yes
-	{ 128 },
-	{ A }, // scroll
-	{ 128 },
-	{ A }, // add to party
-	{ 128 },
-	{ A }, // scroll 
-	{ 128 },
-	{ A }, // scroll 
-	{ 128 },
-	{ DOWN }, // select
-	{ 128 },
-	{ A }, // confirm
-	{ 128 },
-	{ A }, // scroll
-	{ 128 },
-	{ A }, // scroll
-	{ 128 },
-
-	// Fly
-	{ X }, // open menu
-	{ 32 },
-	{ A }, // select town map
-	{ 200 },
-	{ A }, // tap hammerlock hills FP
-	{ 32 },
-	{ A }, // FLY
-	{ 200 },
-
-	// Circle
-	{ LONG_UP },
-	{ LONG_UP },
-	{ LONG_RIGHT },
-	{ STICK_CIRCLE },
-  { STICK_CIRCLE_ADOWN },
-  { STICK_CIRCLE },
-  { STICK_CIRCLE_ADOWN },
-	{ STICK_CIRCLE },
-  { STICK_CIRCLE_ADOWN },
-  { STICK_CIRCLE },
-  { STICK_CIRCLE_ADOWN },
-	{ STICK_CIRCLE },
-  { STICK_CIRCLE_ADOWN },
-  { STICK_CIRCLE },
-  { STICK_CIRCLE_ADOWN },
-	{ STICK_CIRCLE },
-  { STICK_CIRCLE_ADOWN },
-  { STICK_CIRCLE },
-	{ STICK_CIRCLE_ADOWN },
-	{ STICK_CIRCLE },
-  { STICK_CIRCLE_ADOWN },
-  { STICK_CIRCLE },
-	{ STICK_CIRCLE_ADOWN },
+	{ NORMAL_WAIT },
+	{ A },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ A },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ A },
+	{ WAIT_FOR_RELEASE },
+	{ A },
+	{ WAIT_BETWEEN },
+	{ DOWN },
+	{ NORMAL_WAIT },
+	{ A },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ A },
+	{ NORMAL_WAIT },
+	{ UP },
+	{ NORMAL_WAIT },
+	{ A },
+	{ WAIT_FOR_RELEASE },
+	{ A },
+	{ WAIT_BETWEEN },
 };
 
-static const command skip_step[] = {
-	{ 255 },
+static const command column_swap[] = {
+	{ 32 },
+	{ RIGHT },
+	{ 32 },
+	{ UP },
+	{ 32 },
+	{ UP },
+	{ 32 },
+	{ UP },
+	{ 32 },
+	{ UP },
+	{ 32 },
+};
+
+static const command end_swap[] = {
+	{ 64 },
+	{ UP },
+	{ 32 },
+	{ UP },
+	{ 32 },
+	{ UP },
+	{ 32 },
+	{ UP },
+	{ 32 },
+	{ LEFT },
+	{ 32 },
+	{ LEFT },
+	{ 32 },
+	{ LEFT },
+	{ 32 },
+	{ LEFT },
+	{ 32 },
+	{ LEFT },
+	{ 32 },
 };
 
 // Main entry point.
@@ -275,8 +316,9 @@ int ypos = 0;
 int bufindex = 0;
 int duration_count = 0;
 int portsval = 0;
-int cycle_repeat_counter = 0;
 int skipsize = 0;
+int rows_done = 0;
+int cur_col = 0;
 
 // Prepare the next report for the host.
 void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
@@ -300,8 +342,11 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 	uint16_t buttonDuration = NORMAL_DOWN;
 	uint16_t buttonToHit = step[bufindex].button;
 
-	if (cycle_repeat_counter == DAYS_IN_MONTH) {
-		buttonToHit = skip_step[bufindex].button;
+	if (rows_done && cur_col == NUM_COLUMNS) {
+		buttonToHit = end_swap[bufindex].button;
+	}
+	else if (rows_done) {
+		buttonToHit = column_swap[bufindex].button;
 	}
 
 	if ( buttonToHit == STICK_CIRCLE || buttonToHit == STICK_CIRCLE_ADOWN ) {
@@ -415,12 +460,12 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 					break;
 
 				case X:
-					ReportData->Button |= SWITCH_X;
+					ReportData->Button |= SWITCH_PLUS;
 					break;
 
-				// case R:
-				// 	ReportData->Button |= SWITCH_R;
-				// 	break;
+				case R:
+					ReportData->Button |= SWITCH_R;
+					break;
 
 				// case THROW:
 				// 	ReportData->LY = STICK_MIN;				
@@ -448,23 +493,30 @@ void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
 				duration_count = 0;				
 			}
 
-			if (cycle_repeat_counter == DAYS_IN_MONTH) {
-				skipsize = (int)( sizeof(skip_step) / sizeof(skip_step[0]));
+			if (rows_done && cur_col == NUM_COLUMNS) {
+				skipsize = (int)( sizeof(end_swap) / sizeof(end_swap[0]));
+			} else if (rows_done) {
+				skipsize = (int)( sizeof(column_swap) / sizeof(column_swap[0]));
 			} else {
 				skipsize = (int)( sizeof(step) / sizeof(step[0]));
 			}
+
 			if (bufindex > skipsize - 1)
 			{
-
+				state = BREATHE;
 				bufindex = 0;
 				duration_count = 0;
-				if (cycle_repeat_counter == DAYS_IN_MONTH) {
-					cycle_repeat_counter = 0;
-				} else if (RESET_CYCLES) {
-					cycle_repeat_counter++;
-				}
 
-				state = BREATHE;
+				if (!rows_done) {
+					rows_done = 1;
+				} else if (rows_done) {
+					bufindex = 4; // start on step 4 to skip warm up
+					rows_done = 0;
+					cur_col++;
+				}
+				if (cur_col > NUM_COLUMNS) {
+					state = DONE;
+				}
 
 				ReportData->LX = STICK_CENTER;
 				ReportData->LY = STICK_CENTER;
